@@ -22,3 +22,6 @@ Icon?
 /application/configs/*
 /library/Credentials/*
 public/media/hash/*
+
+mup.json
+settings.json
