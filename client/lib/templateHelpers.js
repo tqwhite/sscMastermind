@@ -4,6 +4,6 @@ Template.registerHelper('headerColor', function(){
 		return "#fde";	
 	}
 	else{
-		return "$dfe";
+		return "#dfe";
 	}
 })
