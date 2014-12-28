@@ -47,10 +47,10 @@ Each server implements every possible security mechanism. Access to each is stri
 <div class='subHead'>Security Architecture</div>
 
 <p>
-Access to secrets is implemented with a two-step encryption process. First, the user defined Secret Password is used to unlock the SHA2, 2048 bit Super Key. That key is used to unlock a Secret Code Name. That Secret Code Name is sent to the Secret Server with a request for access to the secret. If the Secret Server judges this to be a valid request, the encrypted secret is returned to the Mastermind which uses the Super Key to decrypt it and send it (secured with SSL) to the user.
+Access to secrets is implemented with a two-step encryption process. First, the user defined Secret Password is used to unlock the 448 bit, Blowfish Super Key. That key is used to unlock a Secret Code Name. That Secret Code Name is sent to the Secret Server with a request for access to the secret. If the Secret Server judges this to be a valid request, the encrypted secret is returned to the Mastermind which uses the Super Key to decrypt it and send it (secured with SSL) to the user.
 </p>
 <p>
-The divided system architecture and two step encryption provides tremendous resistance to brute force attack. Practically speaking, it is impossible to crack a secret encrypted with a 2048 bit key. That means that the only realistic vulnerability is a short, user defined Secret Password.
+The divided system architecture and two step encryption provides tremendous resistance to brute force attack. Practically speaking, it is impossible (and by impossible, we mean 2*10^48 years) to crack a secret encrypted with a 448 bit key. That means that the only realistic vulnerability is a short, user defined Secret Password.
 </p>
 <p>
 However, the only thing that is encrypted with the Secret Password is the Super Key. Since the Super Key is random data, the only way to determine if the cracking attempt is successful, is to try to access a secret.
