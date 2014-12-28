@@ -1,12 +1,123 @@
 <template name='intro'>
-<div style='position:relative;'>
-<img src='accessDiagram.png'>
-<div style='border: 2pt solid red;
-left: 279px;
+<div style='position:relative;width:500px;margin:20px 0px 0px 20px;'>
+
+
+
+<div class='explanation'>
+<div class='headline'>Super Secret Crypto: Where Secrets go to Hide</div>
+
+<p>
+Super Secret Crypto is a web-based service that allows the secure storage and sharing of secrets. It applies several strategies to insure that secrets are as safe as possible from hackers, legal authorities and user error.  Inside the system, all secrets are encrypted with state of the art SHA2 algorithm using a maximum 2048 bit, random Super Key.
+</p>
+
+<div class='subHead'>Saving Secrets Securely</div>
+
+<p><div style='border: 2pt solid gray;
+float:right;
+width:156px;
 padding: 10px;
-position: absolute;
-top: 111px;'>
-	<a href='start' style='text-decoration:none;color:gray;cursor:pointer;'>It Doesn't Work Yet!!</a>
+margin:20px;'>
+	<img id='smallDiagram'  src='accessDiagram.png' style='width:150px;'><br/>
+	<a class='insideLink' href='start' style='text-decoration:none;cursor:pointer;'>It Doesn't Work Yet!!</a>
 </div>
+The Super Key is encrypted with a user selected Secret Password. This allows the user to make a trade off of convenience (a shorter, more memorable Secret Password) vs security (a longer, more random Secret Password). For maximum security, the system will allow the user to remove the Super Key from the Super Secret system and upload it when the secret needs to accessed. When a user creates a Secret Password, it is never retained by the Super Secret Crypto system and therefore cannot be accessed by hackers or authorities.
+</p>
+
+<div class='subHead'>Sharing Secrets</div>
+
+<p>
+Super Secret Crypto allows a user to share secrets by managing a temporary key process that also allows the user to decide whether convenience is most important (the system generates the temporary Secret Password and makes it available to recipient on login) or security is paramount (the user specifies the temporary Secret Password and gives it to the recipient outside the system). 
+</p>
+<p>
+The sharing process will require the secret to be accepted in a short period of time after which, the temporary version of the secret will be deleted. Upon acceptance, the recipient will be required to create a new password with a strength specified by the originator of the share.
+</p>
+<p>
+The system will remember the linkage and, when the secret is changed, offer a process to update the sharing recipient's copy. It will also allow the originator to remove the recipient's access.
+</p>
+
+<div class='subHead'>Super Secret Crypto Systems</div>
+
+<p>
+Internally, the system is divided into two separate parts. The Mastermind is a server and database that holds user information and executes encryption and decryption processes. The Secret Server contains encrypted secrets and provides a security barrier to their access. 
+</p>
+<p>
+Each server implements every possible security mechanism. Access to each is strictly limited using SSL to secure user access and intra-system communication and with RSA keys for management access. Ports are locked. Unused services and software are removed. The servers are stripped down to the hardest components.
+</p>
+
+<div class='subHead'>Security Architecture</div>
+
+<p>
+Access to secrets is implemented with a two-step encryption process. First, the user defined Secret Password is used to unlock the SHA2, 2048 bit Super Key. That key is used to unlock a Secret Code Name. That Secret Code Name is sent to the Secret Server with a request for access to the secret. If the Secret Server judges this to be a valid request, the encrypted secret is returned to the Mastermind which uses the Super Key to decrypt it and send it (secured with SSL) to the user.
+</p>
+<p>
+The divided system architecture and two step encryption provides tremendous resistance to brute force attack. Practically speaking, it is impossible to crack a secret encrypted with a 2048 bit key. That means that the only realistic vulnerability is a short, user defined Secret Password.
+</p>
+<p>
+However, the only thing that is encrypted with the Secret Password is the Super Key. Since the Super Key is random data, the only way to determine if the cracking attempt is successful, is to try to access a secret.
+</p>
+<p>
+To do this, the hacker has to apply the possible secret key to decrypt the Secret Code Name. This Secret Code Name is also random. The only way to know if it's a valid Secret Code Name is to ask the Secret Server for the secret.
+</p>
+
+<div class='subHead'>Backup Protection in the Secret Server</div>
+
+<p>
+The Secret Server is, however, very fussy about failed attempts to access secrets. If the hacker causes the system to request access with an invalid Secret Code Name, it will go into a defensive mode. Subsequent attempts to access secrets will take longer and longer. This makes the process of trying to guess Secret Passwords be very time consuming. Eventually, the Secret Server will decide to shut down. It will also notify management that an attack is in process.
+</p>
+<p>
+In case of a legal process intended to access secrets, Super Secret Crypto could provide account information that would include an encrypted Super Key and a Secret Code Name encrypted with the Super Key. However, there would be no way to know which secrets are referenced by that Secret Code Name and no way for a decryption effort to know when the Super Key or Secret Code Name have been successfully decrypted in order to demand access to a specific secret, and, thus, no way for a legal entity to specify which encrypted secret it needs.
+</p>
+<p>
+And, of course, in the case of a user having a need for extraordinary security, the Super Key may not even be in the system's possession.
+</p>
+</div>
+
+
+<img id='bigDiagram' src='accessDiagram.png' style='position:absolute;top:100px;left:100px;display:none;'>
+<style>
+
+.explanation{
+
+	line-height:1.5;
+}
+
+.explanation .headline{
+	font-size:125%;
+	font-weight:bold;
+}
+
+.explanation .subHead{
+	font-weight:bold;
+}
+
+.explanation p{
+	margin-bottom:10pt;
+}
+
+#smallDiagram{
+border:2pt solid white;
+cursor:pointer;
+}
+#smallDiagram:hover{
+border:2pt solid red;
+}
+.insideLink{
+color:gray;
+}
+.insideLink:hover{
+color:red;
+}
+</style>
+<script>
+$('#smallDiagram').bind('click', function(e){
+e.stopPropagation();
+$('#bigDiagram').show();
+	$('body').bind('click', function(){
+	$('#bigDiagram').hide();
+	$('body').unbind('click');
+	});
+
+});
+</script>
 </div>
 </template>
