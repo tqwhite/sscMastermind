@@ -1,8 +1,15 @@
 <template name='headerBlock'>
-<div style='width:900px;height:100px;background:{{headerColor}}'>
-<br/>
-<a href='/'>Home</a><br/>
-<a href='/start'>Start</a><br/>
-<a href='/secretsManage'>Manage</a><br/>
+<div class='headerBlock'>
+
+<div>
+	<div class='loginContainer'>
+		{{> loginButtons}}
+	</div>
+
+	<a href='/'>Info</a> 
+	{{#if currentUser}}<a href='/secretsManage'>Secrets!</a> {{/if}}
+</div>
+
+	<div style='font-size:80%;color:gray;margin:5px 0px;'>Note: In development. This does not protect <i>anything</i> yet.</div>
 </div>
 </template>

@@ -1,6 +1,13 @@
 <template name='insideLayout'>
+
+<div class='headerBlock' style='background:{{headerColor}};'>
 {{> headerBlock }}
-<div style='width:900px;height:400px;background:rgba(98, 95, 95, .1);'>
+</div>
+<div class='contentContainer'>
 {{> yield}}
+</div>
+<div class='footerBlock'>
+Super Secret Crypto: Where Secrets Go to Hide<br/>
+TQ White II • 708-763-0100
 </div>
 </template>

@@ -1,0 +1,24 @@
+
+
+.contentContainer{
+padding:30px 0px 0px 30px;
+margin:0px auto;
+}
+.headerBlock{
+height:50px;
+padding:10px 10px;
+width:100%;
+}
+
+.headerBlock .loginContainer{
+float:left;margin-right:20px;
+}
+
+.footerBlock{
+clear:both;text-align:center;
+margin:0px auto;
+font-size:80%;
+color:gray;
+border-top:1pt solid gray;
+padding-top:10px;
+}

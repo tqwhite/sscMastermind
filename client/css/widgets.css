@@ -1,0 +1,51 @@
+
+
+.simpleButton{
+	color:#297FFF;
+	background:#f2f2f2;
+  	font-weight:bold;
+	cursor:pointer;
+  	
+	text-align:center;
+	
+	padding:10px 10px 0px 10px;
+	margin:10px 10px 10px 10px;
+	
+	height:30px;
+	width:70px;
+	
+	border-top:1pt solid gray;
+	border-top:1pt solid #666;
+	border-left:1pt solid #666;
+	border-right:1pt solid #000;
+	border-bottom:1pt solid #000;
+	
+	border-radius: 4px; /* CSS3 */
+	-moz-border-radius: 4px; /* Firefox */
+	-webkit-border-radius: 4px; /* Safari, Chrome */
+	-webkit-box-shadow:none;
+		-moz-box-shadow:none;
+			box-shadow:none;
+
+	-webkit-box-shadow:2px 3px 5px rgba(0, 0, 0, .5);
+	   -moz-box-shadow:2px 3px 5px rgba(0, 0, 0, .5);
+	        box-shadow:2px 3px 5px rgba(0, 0, 0, .5);
+
+}
+
+
+.simpleButton:hover{
+	background:#f2f2f2;
+	color:#666;
+  -moz-border-radius: 4px; /* Firefox */
+  -webkit-border-radius: 4px; /* Safari, Chrome */
+  border-radius: 4px; /* CSS3 */
+}
+
+.bad{
+	color:red;
+}
+
+.good{
+	color:green;
+}
