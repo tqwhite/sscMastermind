@@ -5,9 +5,7 @@
 	<div class='loginContainer'>
 		{{> loginButtons}}
 	</div>
-
-	<a href='/'>Info</a> 
-	{{#if currentUser}}<a href='/secretsManage'>Secrets!</a> {{/if}}
+	{{#if currentUser}}<span style='margin-left:30px;'><a href='/secretsManage'>Show Me Secrets!</a></span> {{/if}}
 </div>
 
 	<div style='font-size:80%;color:gray;margin:5px 0px;'>Note: In development. This does not protect <i>anything</i> yet.</div>
