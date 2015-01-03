@@ -18,6 +18,7 @@ var setUpPasswordEntry = function(e) {
 
 };
 
+Meteor.subscribe('findForUser');
 
 Template.secretsManageList.helpers({
 	secretList: function() {

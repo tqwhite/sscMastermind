@@ -6,7 +6,12 @@ Template.registerHelper('headerColor', function(){
 	else{
 		return "#dfe";
 	}
+});
+
+Template.registerHelper('userId', function(){
+	return Meteor.user()._id;
 })
+
 
 Handlebars.registerHelper("debug", function(optionalValue) { 
   console.log("====================");

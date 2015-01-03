@@ -7,7 +7,8 @@ Template.secretsEntryForm.events({
 			name: formContainer.find('[name=name]').val(),
 			secret: formContainer.find('[name=secret]').val(),
 			secretPassword: formContainer.find('[name=secretPassword]').val(),
-			_id: formContainer.find('[name=_id]').val()
+			_id: formContainer.find('[name=_id]').val(),
+			ownerId: Meteor.user()._id
 		};
 		
 		
