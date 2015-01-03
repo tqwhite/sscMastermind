@@ -2,7 +2,7 @@
 
 var getSecret = function(secretPassword, _id, callback) {
 
-	Meteor.call('models.secrets.decryptedFindOne', {
+	Meteor.call('server.retrieving.decryptedFindOne', {
 		secretPassword: secretPassword,
 		selector: {
 			_id: _id
