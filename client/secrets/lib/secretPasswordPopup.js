@@ -15,13 +15,22 @@ var getSecret = function(secretPassword, _id, callback) {
 var secureRetrieve = function(e) {
 	e.stopPropagation();
 	e.preventDefault();
-	var passwordContainer = $(e.target).parent();
+	var t=Template.instance();
+	var passwordContainer = $(t.firstNode);
 	var secretPassword = passwordContainer.find('[name=secretPassword]').val();
+	
+	if (!secretPassword){
+		Session.set('status', {message:"You have to enter a 'Secret Password'", type:'bad'});
+		return;
+	}
+	
 	var _id = passwordContainer.find('[name=_id]').val();
 	var secret = getSecret(secretPassword, _id, function(err, result) {
 		if (err) {
-			return alert(err.reason);
+			Session.set('status', {message:err.reason, type:'bad'});
+			return;
 		} else {
+			Session.set('status', {message:'', type:'good'});
 			Session.set('openSecret', result);
 			passwordContainer.hide();
 			$('.secretContainer .entryFormContainer').show();
@@ -33,7 +42,12 @@ var secureRetrieve = function(e) {
 
 
 Template.listPasswordEntry.events({
-	'click #submitButton': secureRetrieve
+	'click #submitButton': secureRetrieve,
+	'click #cancelButton': function(e){
+		Session.set('status', {message:'Canceled', type:'good'});
+		var t=Template.instance();
+		$(t.firstNode).hide();
+	}
 })
 
 Template.secretsEntryForm.helpers({

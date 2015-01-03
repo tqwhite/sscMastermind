@@ -44,8 +44,10 @@
 
 .bad{
 	color:red;
+	border-bottom:1pt solid red;
 }
 
 .good{
 	color:green;
+	border-bottom:none;
 }

@@ -29,6 +29,15 @@ Template.secretsListItem.events({
 });
 
 
+Template.newSecretButton.events({
+
+	'click': function(e){
+		Session.set('openSecret', {name:'', secret:'', _id:'', secretPassword:''});
+		$('.secretContainer .entryFormContainer').show();
+	}
+	
+});
+
 
 // if we wanted this to globally available, use...
 // Template.registerHelper('secretsManage.secretList', function(){
