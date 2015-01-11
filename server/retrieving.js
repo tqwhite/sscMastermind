@@ -1,9 +1,4 @@
 
-var pingSecretServer=function(){
-	var result=HTTP.call('POST', 'http://localhost:5000/ping')
-	return result;
-}
-
 
 
 Meteor.publish('server.retrieving.findForUser', function() {
@@ -20,7 +15,7 @@ Meteor.methods({
 		//this should do something good with the secretPassword
 		console.log("Server says, UNUSED SO FAR secretPassword=" + secretPassword);
 		
-		console.dir(pingSecretServer());
+		console.dir(secretServerInterface.get().content);
 		
 		var secret=Secrets.findOne(selector);
 		return secret;

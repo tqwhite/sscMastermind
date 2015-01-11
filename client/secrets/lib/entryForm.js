@@ -12,7 +12,7 @@ Template.secretsEntryForm.events({
 		};
 		
 		
-		Meteor.call('models.secrets.save', post, function(error, result) { // display the error to the user and abort);
+		Meteor.call('server.models.secrets.save', post, function(error, result) { // display the error to the user and abort);
 			if (error) {
 				Session.set('status', {   
 				  message:error.reason,   
@@ -27,10 +27,12 @@ Template.secretsEntryForm.events({
 			Router.go('secretsManage', {
 				_id: result._id
 			});
+			
+
 	
 Session.set('openSecret', '');
-			formContainer.find('[name=name]').val('');
-			formContainer.find('[name=secret]').val('');
+			formContainer.find('[name=secretName]').val('');
+			formContainer.find('[name=secretContent]').val('');
 			formContainer.find('[name=secretPassword]').val('');
 			formContainer.find('[name=_id]').val('');
 			$('.secretContainer .entryFormContainer').hide();
