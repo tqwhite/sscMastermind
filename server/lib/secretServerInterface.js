@@ -8,8 +8,10 @@ secretServerInterface = {
 		return result;
 	},
 
-	get: function() {
-		var result = HTTP.call('GET', 'http://localhost:5000/access')
+	get: function(requestBody) {
+		var result = HTTP.call('GET', 'http://localhost:5000/access',{
+			data:requestBody
+		})
 		return result;
 	}
 }

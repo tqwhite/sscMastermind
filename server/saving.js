@@ -1,53 +1,60 @@
 
 Meteor.methods({
-	'NEW.models.secrets.save': function(secretFormData) {
-	
-	var	secretName=secretFormData.secretName,
-		secretContent=secretFormData.secretContent,
-		secretPassword=secretFormData.secretPassword,
-		hiddenCodeName=secretFormData.hiddenCodeName, //only present on update
-		originalSecretPassword=secretFormData.originalSecretPassword,
-		_id=secretFormData._id,
-		ownerId=secretFormData.ownerId; //this should probably not be input, it should be looked up
-		
-		//change the above to be validation
-		
-		cryptographer= new cryptography(secretFormData);
-	
-		var secretPackage=cryptography.encrypt(secretContent);
-		var codeName=secret.codeName?decrypFromStorage(hiddenCodeName):'';
-		
-		var storagePackage=secretServerInterface.post({hiddenSecret:secretPackage.hiddenText, codeName:codeName});
-		
-		secret.key=cryptography.encryptForStorage(secret.key);
-		secret.codeName=cryptography.encryptForStorage(storagePackage.codeName);
-		
+	'server.models.secrets.save': function(secretFormData) {
 
-		
-		if (!secret._id){
-			delete secret._id;
-			secret._id=Secrets.insert(secret);
-		}
-		else{
-			Secrets.update(secret._id, secret);
+		//change the above to be validation
+
+		var cryptographer = new cryptography.v1({
+			secretName: secretFormData.secretName,
+			secretContent: secretFormData.secretContent,
+			storageKey: secretFormData.secretPassword
+		});
+
+		var hiddenSecretContent = cryptographer.getHiddenSecretContent();
+
+		var serverInfoPackage = secretServerInterface.post({
+			hiddenSecret: hiddenSecretContent,
+			annotation: secretFormData.secretName
+		});
+		cryptographer.setCodeName(serverInfoPackage.data.codeName);
+
+
+console.log('serverInfoPackage.data.codeName='+serverInfoPackage.data.codeName+'\n');
+
+
+		saveObj = {};
+		saveObj.hiddenCodeName = cryptographer.getHiddenCodeName();
+		saveObj.hiddenSuperKey = cryptographer.getHiddenSuperKey();
+		saveObj.secretName = secretFormData.secretName;
+		saveObj._id = secretFormData._id;
+		saveObj.ownerId = secretFormData.ownerId;
+
+
+
+		if (!secretFormData._id) {
+			delete saveObj._id;
+			saveObj._id = Secrets.insert(saveObj);
+		} else {
+			Secrets.update(saveObj._id, saveObj);
 		}
 		return {
-			refId: secret._id
+			refId: saveObj._id
 		}
-		
-		
+
+
+
 	}
 });
 
 
 Meteor.methods({
-	'server.models.secrets.save': function(secret) {
+	'models.secrets.save': function(secret) {
+		console.dir(secret);
 		delete secret.key;
-		if (!secret._id){
+		if (!secret._id) {
 			delete secret._id;
-			secret._id=Secrets.insert(secret);
-		}
-		else{
+			secret._id = Secrets.insert(secret);
+		} else {
 			Secrets.update(secret._id, secret);
 		}
 		return {
