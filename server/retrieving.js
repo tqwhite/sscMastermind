@@ -25,19 +25,13 @@ Meteor.methods({
 		var codeName=cryptographer.getOpenCodeName();
 
 		var serverInfoPackage = secretServerInterface.get({
-			codeName: codeName
-		});
-				
-		var secretContent=serverInfoPackage.data.hiddenSecretContent; //cryptographer.getOpenSecretContent()
+			codeName: secret.hiddenCodeName
+		});			
+		var secretContent=serverInfoPackage.content.fileData; //cryptographer.getOpenSecretContent()
 		
-		cryptographer.setHiddenSecretContent(secretContent);
+//		cryptographer.setHiddenSecretContent(secretContent);
 		
-		var secret=cryptographer.getOpenSecretContent();
-
-console.log("\n\nsecretXX\n\n");
-console.dir(secret);
-console.log("\n\n");
-
+//		var secret=cryptographer.getOpenSecretContent();
 
 
 /*
@@ -57,7 +51,8 @@ STATUS:
 			secretContent:secretContent,
 			secretPassword:secretPassword,
 			_id:secret._id,
-			originalSecretPassword:secretPassword
+			originalSecretPassword:secretPassword,
+			hiddenCodeName:secret.hiddenCodeName
 		};
 		return formData;
 	}

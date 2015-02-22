@@ -11,19 +11,26 @@ Meteor.methods({
 		});
 
 		var hiddenSecretContent = cryptographer.getHiddenSecretContent();
+		
+		var hiddenSecretContent = secretFormData.secretContent;
 
 		var serverInfoPackage = secretServerInterface.post({
+			codeName:secretFormData.hiddenCodeName,
 			hiddenSecret: hiddenSecretContent,
 			annotation: secretFormData.secretName
 		});
+		
 		cryptographer.setCodeName(serverInfoPackage.data.codeName);
-
-
-console.log('serverInfoPackage.data.codeName='+serverInfoPackage.data.codeName+'\n');
-
-
+		
+// 		saveObj = {};
+// 		saveObj.hiddenCodeName = cryptographer.getHiddenCodeName();
+// 		saveObj.hiddenSuperKey = cryptographer.getHiddenSuperKey();
+// 		saveObj.secretName = secretFormData.secretName;
+// 		saveObj._id = secretFormData._id;
+// 		saveObj.ownerId = secretFormData.ownerId;
+		
 		saveObj = {};
-		saveObj.hiddenCodeName = cryptographer.getHiddenCodeName();
+		saveObj.hiddenCodeName = serverInfoPackage.data.codeName;
 		saveObj.hiddenSuperKey = cryptographer.getHiddenSuperKey();
 		saveObj.secretName = secretFormData.secretName;
 		saveObj._id = secretFormData._id;
